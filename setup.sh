@@ -40,7 +40,7 @@ function ubuntu() {
         PKGS=(wget curl git unzip ca-certificates gnupg lsb-release apt-transport-https)
         
         # programs to be installed need base packages
-        APPS=($req openjdk-11-jdk)
+        APPS=(openjdk-11-jdk $req)
 
         current_user=$(whoami)
 
