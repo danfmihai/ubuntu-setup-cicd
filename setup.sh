@@ -5,8 +5,6 @@ echo -e " \n THE IP OF$(tput setaf 3) $HOSTNAME $(tput sgr 0)is : $(tput setaf 3
 cat /tmp/ip.txt 
 echo
 
-req=$1
-
 # geting info about OS
 OS=$(cat /etc/*release* | grep -w "ID" | sed 's/\"/''/g' | awk '{print substr($0, 4, 8)}' | tr '[:lower:]' '[:upper:]')
 echo
@@ -40,7 +38,7 @@ function ubuntu() {
         PKGS=(wget curl git unzip ca-certificates gnupg lsb-release apt-transport-https openjdk-11-jdk)
         
         # programs to be installed need base packages
-        APPS=(openjdk-11-jdk)
+        APPS=(docker-ce docker-ce-cli containerd.io kubectl ansible awscli packer jenkins)
 
         current_user=$(whoami)
 
@@ -57,7 +55,6 @@ function ubuntu() {
           #sets timezone for EST  
           timedatectl set-timezone America/New_York
           apt update && apt upgrade -y
-
 }          
 
 case $OS in
