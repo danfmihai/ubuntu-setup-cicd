@@ -45,6 +45,7 @@ function ubuntu() {
         current_user=$(whoami)
 
         #  amazon-linux-extras install epel -y
+        apt update && apt upgrade -y
 
         echo "Installing required packages:\"n"
 
@@ -56,7 +57,7 @@ function ubuntu() {
 
           #sets timezone for EST  
           timedatectl set-timezone America/New_York
-          apt update && apt upgrade -y
+          
 }          
 
 case $OS in
