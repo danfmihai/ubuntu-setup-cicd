@@ -1,5 +1,6 @@
 #!/bin/bash
 
+clear
 echo 
 echo -e " \n THE IP OF$(tput setaf 3) $HOSTNAME $(tput sgr 0)is : $(tput setaf 3)$(ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/') $(tput sgr 0)\n" > /tmp/ip.txt
 cat /tmp/ip.txt 
@@ -10,6 +11,7 @@ OS=$(cat /etc/*release* | grep -w "ID" | sed 's/\"/''/g' | awk '{print substr($0
 echo
 echo "Will install packages for ${OS}"
 echo
+sleep 3
 
 function centos() {
         #base packages
@@ -21,7 +23,7 @@ function centos() {
 
         current_user=$(whoami)
         # add dns server
-        nmcli con modify System\ eth0 ipv4.dns "192.168.102.1" && systemctl restart NetworkManager
+        #nmcli con modify System\ eth0 ipv4.dns "192.168.102.1" && systemctl restart NetworkManager
 
         #  amazon-linux-extras install epel -y
 
