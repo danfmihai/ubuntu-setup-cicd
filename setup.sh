@@ -37,10 +37,10 @@ function centos() {
 function ubuntu() {
 
         #base packages
-        PKGS=(wget curl git unzip ca-certificates gnupg lsb-release apt-transport-https)
+        PKGS=(wget curl git unzip ca-certificates gnupg lsb-release apt-transport-https openjdk-11-jdk)
         
         # programs to be installed need base packages
-        APPS=(openjdk-11-jdk $req)
+        APPS=(openjdk-11-jdk)
 
         current_user=$(whoami)
 
@@ -57,19 +57,6 @@ function ubuntu() {
           #sets timezone for EST  
           timedatectl set-timezone America/New_York
           apt update && apt upgrade -y
-
-    wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key |   apt-key add -
-    sh -c 'echo deb https://pkg.jenkins.io/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
-
-    apt update
-    sleep 1
-
-    for app in "${APPS[@]}"
-        do
-            echo "Installing ${app}:"
-              apt -q install -y  $app
-    done;
-
 
 }          
 
