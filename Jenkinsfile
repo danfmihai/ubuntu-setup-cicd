@@ -35,13 +35,25 @@ pipeline {
                         sh '''
                         docker build -t 192.168.102.171:8083/springapp:${VERSION} .
                         docker login -u admin -p $docker_password 192.168.102.171:8083
+                        docker tag 192.168.102.171:8083/springapp:${VERSION} 192.168.102.171:8083/springapp:latest
                         docker push 192.168.102.171:8083/springapp:${VERSION}
+                        docker push 192.168.102.171:8083/springapp:latest
                         docker rmi 192.168.102.171:8083/springapp:${VERSION}
                         '''
                     }
                 }
             }
         }
+        /* stage("indentifying misconfig with datree in helm charts"){
+            steps{
+                script{
+                    dir('kubernetes/') {
+                        sh 'helm datree test myapp'
+                    }
+                }
+            }
+
+        } */
         
     }
     post {
